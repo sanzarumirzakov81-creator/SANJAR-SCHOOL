@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SANJAR SCHOOL · тёмный минимализм</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #0a0c0f;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* главный контейнер — тёмное стекло */
+        .app {
+            max-width: 1000px;
+            width: 100%;
+            background: #13161c;
+            border-radius: 36px;
+            border: 1px solid #2a2f3a;
+            padding: 28px 32px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        /* верхняя строка: приглашение + стата + меню */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .invite {
+            background: #1e232b;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #b0b8c5;
+            border: 1px solid #2f3642;
+            letter-spacing: 0.2px;
+        }
+
+        .invite span {
+            color: #f5b342;
+            margin-right: 6px;
+        }
+
+        .invite .username {
+            color: #7b9eff;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .stats-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background: #1a1f28;
+            padding: 6px 18px 6px 24px;
+            border-radius: 60px;
+            border: 1px solid #2f3642;
+        }
+
+        .stars {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #e0e4ec;
+        }
+
+        .stars .value {
+            background: #2c2f3b;
+            color: #f5b342;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-weight: 700;
+        }
+
+        .lives {
+            display: flex;
+            gap: 6px;
+            color: #ff5e5e;
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+
+        .deadline-timer {
+            color: #f5b342;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: #262d39;
+            padding: 4px 12px;
+            border-radius: 40px;
+            border: 1px solid #3c4452;
+        }
+
+        .menu-btn {
+            background: #262d39;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            font-weight: 300;
+            color: #c0c8d5;
+            cursor: pointer;
+            border: 1px solid #3c4452;
+            transition: 0.15s;
+            user-select: none;
+        }
+
+        .menu-btn:hover {
+            background: #2f3847;
+            color: white;
+        }
+
+        /* блок профиля + школа */
+        .identity {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+            background: #11161e;
+            padding: 14px 26px;
+            border-radius: 70px;
+            border: 1px solid #2a2f3a;
+        }
+
+        .avatar {
+            width: 56px;
+            height: 56px;
+            background: #2b313e;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f0f3fa;
+            font-weight: 700;
+            font-size: 1.5rem;
+            border: 2px solid #404754;
+        }
+
+        .designer-name {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #f0f3fa;
+            letter-spacing: -0.3px;
+        }
+
+        .school-badge {
+            margin-left: auto;
+            background: #000000;
+            color: #f5b342;
+            padding: 10px 26px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            border: 1px solid #3a3f4b;
+            box-shadow: none;
+        }
+
+        .school-badge span {
+            background: #2f2f2f;
+            color: #dddddd;
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 60px;
+            margin-left: 10px;
+        }
+
+        /* шапка урока */
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .lesson-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #eef2f8;
+        }
+
+        .lesson-tag {
+            background: #252c38;
+            padding: 6px 18px;
+            border-radius: 60px;
+            color: #b9c2d2;
+            font-size: 0.9rem;
+            border: 1px solid #363e4b;
+        }
+
+        /* карточка куратора */
+        .curator-block {
+            background: #151b24;
+            border-radius: 28px;
+            padding: 22px 28px;
+            margin: 20px 0;
+            border: 1px solid #2c3440;
+        }
+
+        .curator-btn {
+            background: #1f2937;
+            border: 1px solid #3e4a5a;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 16px 28px;
+            border-radius: 60px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .curator-btn:hover {
+            background: #2d3b4c;
+            border-color: #f5b342;
+        }
+
+        .curator-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #b7c0cd;
+            font-weight: 500;
+        }
+
+        .curator-info .dot {
+            width: 10px;
+            height: 10px;
+            background: #3ecf8e;
+            border-radius: 10px;
+        }
+
+        .curator-info a {
+            color: #7b9eff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .curator-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* блок ДЗ */
+        .hw-block {
+            background: #131a22;
+            border-radius: 26px;
+            padding: 24px;
+            margin: 24px 0;
+            border-left: 6px solid #f5b342;
+        }
+
+        .hw-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 14px;
+            color: #e2e8f0;
+        }
+
+        .hw-text {
+            color: #9aa5b5;
+            line-height: 1.6;
+        }
+
+        /* видео */
+        .video-placeholder {
+            background: #0e1219;
+            border-radius: 28px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d3dcec;
+            font-size: 2rem;
+            font-weight: 500;
+            margin: 32px 0;
+            border: 2px dashed #3a4353;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* поле ввода кода */
+        .code-section {
+            background: #151c26;
+            border-radius: 26px;
+            padding: 22px;
+            margin: 28px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            border: 1px solid #2d3643;
+        }
+
+        .code-section input {
+            flex: 2 1 250px;
+            padding: 16px 24px;
+            background: #0d121b;
+            border: 2px solid #2b3442;
+            border-radius: 70px;
+            font-size: 1rem;
+            color: #e8ecf2;
+            outline: none;
+            transition: 0.1s;
+        }
+
+        .code-section input:focus {
+            border-color: #f5b342;
+        }
+
+        .code-section button {
+            flex: 1 1 140px;
+            background: #1e293b;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 16px 24px;
+            border-radius: 70px;
+            cursor: pointer;
+            font-size: 1rem;
+            border: 1px solid #3e4b5e;
+            transition: 0.15s;
+        }
+
+        .code-section button:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .code-section button:hover:not(:disabled) {
+            background: #2d3e57;
+            border-color: #f5b342;
+        }
+
+        /* контакты */
+        .contacts-frame {
+            background: #11171f;
+            border-radius: 28px;
+            padding: 24px;
+            margin-top: 30px;
+            border: 1px solid #2d3542;
+        }
+
+        .contacts-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #d5deec;
+        }
+
+        .contacts-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #1b232e;
+            padding: 12px 26px;
+            border-radius: 60px;
+            border: 1px solid #313b48;
+        }
+
+        .contact-item a {
+            text-decoration: none;
+            color: #7b9eff;
+            font-weight: 600;
+        }
+
+        /* меню (оверлей) */
+        .menu-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: flex-end;
+            z-index: 1000;
+        }
+
+        .menu-panel {
+            width: 360px;
+            background: #131a22;
+            height: 100%;
+            padding: 32px 24px;
+            border-left: 2px solid #2b3545;
+            box-shadow: -8px 0 30px rgba(0,0,0,0.6);
+            overflow-y: auto;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 36px;
+        }
+
+        .menu-header h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #edf2f9;
+        }
+
+        .close-menu {
+            font-size: 2.5rem;
+            line-height: 1;
+            cursor: pointer;
+            color: #9aa9bb;
+        }
+
+        .lessons-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .lessons-list li {
+            padding: 18px 22px;
+            background: #1b232f;
+            margin-bottom: 12px;
+            border-radius: 30px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.1s;
+            color: #ccd6e6;
+        }
+
+        .lessons-list li.available {
+            background: #1b332b;
+            border-color: #2e7d5e;
+            color: #c7f0db;
+        }
+
+        .lessons-list li.locked {
+            background: #1c212a;
+            color: #6e7b8c;
+            border-color: #2f3744;
+            cursor: not-allowed;
+        }
+
+        .lessons-list li .lock-icon {
+            margin-left: auto;
+            font-size: 1.3rem;
+        }
+
+        .menu-contacts {
+            border-top: 2px solid #2a3340;
+            padding-top: 28px;
+        }
+
+        .menu-contacts p {
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #b7c3d3;
+        }
+
+        .menu-contacts a {
+            display: block;
+            margin: 8px 0;
+            color: #7b9eff;
+            text-decoration: none;
+        }
+
+        /* кастомные модальные окна */
+        .custom-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1b232f;
+            padding: 32px;
+            border-radius: 48px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7);
+            z-index: 1200;
+            display: none;
+            width: 380px;
+            border: 2px solid #3a4557;
+            color: #eef2f8;
+            text-align: center;
+        }
+
+        .custom-modal.active {
+            display: block;
+        }
+
+        .custom-modal h4 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #f5b342;
+        }
+
+        .custom-modal p {
+            font-size: 1.2rem;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .custom-modal button {
+            background: #2a384b;
+            border: 1px solid #4b5a72;
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.15s;
+        }
+
+        .custom-modal button:hover {
+            background: #3e506b;
+            border-color: #f5b342;
+        }
+
+        /* модалка кода (оставляем старую, но убираем alert) */
+        .code-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1b232f;
+            padding: 32px;
+            border-radius: 48px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7);
+            z-index: 1100;
+            display: none;
+            width: 340px;
+            border: 2px solid #3a4557;
+        }
+
+        .code-modal.active {
+            display: block;
+        }
+
+        .code-modal h4 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #f0f4fc;
+        }
+
+        .code-modal input {
+            width: 100%;
+            padding: 16px;
+            background: #0f151f;
+            border: 2px solid #2d3849;
+            border-radius: 40px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-buttons .submit-code {
+            background: #2a384b;
+            color: white;
+            border: 1px solid #4b5a72;
+        }
+
+        .modal-buttons .cancel-modal {
+            background: #262e3a;
+            color: #b1c0d2;
+            border: 1px solid #3a4557;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+
+    <!-- Верхняя панель: приглашение + стата + меню -->
+    <div class="top-bar">
+        <div class="invite">
+            <span>⭐</span> Пригласить друга <span class="username">@RAZEX_07</span>
+        </div>
+        <div class="stats-row">
+            <div class="stars">
+                <span class="value" id="starCounter">0/15</span> <span>⭐</span>
+            </div>
+            <div class="lives" id="livesContainer">
+                <span>❤️</span><span>❤️</span><span>❤️</span>
+            </div>
+            <div class="deadline-timer" id="deadlineTimer">--:--</div>
+            <div class="menu-btn" id="openMenuBtn">☰</div>
+        </div>
+    </div>
+
+    <!-- Аватар + RAZEX_DESIGN + SANJAR SCHOOL -->
+    <div class="identity">
+        <div class="avatar">RD</div>
+        <div class="designer-name">RAZEX_DESIGN</div>
+        <div class="school-badge">SANJAR SCHOOL <span>SS</span></div>
+    </div>
+
+    <!-- Информация текущего урока -->
+    <div class="lesson-header">
+        <h2 class="lesson-title" id="currentLessonTitle">Урок YS · Старт</h2>
+        <div class="lesson-tag">этап 1/5</div>
+    </div>
+
+    <!-- Блок куратора (обновлённый) -->
+    <div class="curator-block">
+        <button class="curator-btn" id="curatorChatBtn">📢 ПЕРЕЙТИ В ЧАТ К КУРАТОРУ И СДАТЬ ЗАДАНИЕ</button>
+        <div class="curator-info">
+            <span class="dot"></span>
+            <span>Куратор наставник </span>
+            <a href="https://t.me/Nukem_M" target="_blank">@Nukem_M</a>
+        </div>
+    </div>
+
+    <!-- ДЗ -->
+    <div class="hw-block">
+        <div class="hw-title">📚 ДОМАШНЕЕ ЗАДАНИЕ</div>
+        <div class="hw-text">
+            Выполнить ДЗ из видео. Сдать работу в ЛС куратору до завтра, 18:00 мск.<br><br>
+            Советуем смотреть внимательно и ставить на паузу, выполняя все шаг-за-шагом.<br><br>
+            После проверки куратор скинет тебе кодовое слово, его нужно будет написать в этого бота, откроется следующий урок, ты получишь звезды и восстановишь жизни!
+        </div>
+    </div>
+
+    <!-- Видео (тестовое) -->
+    <div class="video-placeholder">
+        🎬 /ТЕСТ-ВИДЕО
+    </div>
+
+    <!-- Поле для ввода кода (следующий урок) -->
+    <div class="code-section">
+        <input type="text" placeholder="🔐 Введи секретный код от куратора" id="secretCodeInput">
+        <button id="unlockNextBtn">Разблокировать урок</button>
+    </div>
+
+    <!-- Фрейм контактов -->
+    <div class="contacts-frame">
+        <div class="contacts-title">📬 Контакты</div>
+        <div class="contacts-links">
+            <div class="contact-item">📢 Канал: <a href="https://t.me/SANJARDESIGN07" target="_blank">@SANJARDESIGN07</a></div>
+            <div class="contact-item">💬 ЛС: <a href="https://t.me/RAZEX_07" target="_blank">@RAZEX_07</a></div>
+            <div class="contact-item">🧑‍🏫 Куратор: <a href="https://t.me/Nukem_M" target="_blank">@Nukem_M</a></div>
+        </div>
+    </div>
+
+    <!-- Боковое меню (список уроков) -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-panel">
+            <div class="menu-header">
+                <h3>☰ Меню</h3>
+                <span class="close-menu" id="closeMenuBtn">✕</span>
+            </div>
+            <ul class="lessons-list" id="lessonList">
+                <li class="available" data-lesson="1">Урок YS · Старт <span class="lock-icon">⭐</span></li>
+                <li class="locked" data-lesson="2">Урок 2 · Коммерческий интерфейс <span class="lock-icon">🔒</span></li>
+                <li class="locked" data-lesson="3">Урок 3 · Типографика <span class="lock-icon">🔒</span></li>
+                <li class="locked" data-lesson="4">Урок 4 · Сетки <span class="lock-icon">🔒</span></li>
+                <li class="locked" data-lesson="5">Урок 5 · Финальный проект <span class="lock-icon">🔒</span></li>
+            </ul>
+            <div class="menu-contacts">
+                <p>📞 Контакты в меню:</p>
+                <a href="https://t.me/SANJARDESIGN07" target="_blank">Канал @SANJARDESIGN07</a>
+                <a href="https://t.me/RAZEX_07" target="_blank">ЛС @RAZEX_07</a>
+                <a href="https://t.me/Nukem_M" target="_blank">Куратор @Nukem_M</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка для ввода кода закрытого урока -->
+    <div class="code-modal" id="codeModal">
+        <h4>🔒 Введите код</h4>
+        <input type="text" placeholder="секретный код" id="modalCodeInput">
+        <div class="modal-buttons">
+            <button class="submit-code" id="submitModalCode">Открыть</button>
+            <button class="cancel-modal" id="cancelModalBtn">Отмена</button>
+        </div>
+    </div>
+
+    <!-- Кастомное модальное окно для уведомлений и поздравлений -->
+    <div class="custom-modal" id="customNotification">
+        <h4 id="notificationTitle">🎉</h4>
+        <p id="notificationMessage"></p>
+        <button id="closeNotification">OK</button>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- Сохранение в localStorage ----------
+        const STORAGE_KEY = 'sanjarschool_progress';
+
+        // Начальное состояние: всё по нулям, первый урок открыт, 3 жизни
+        const defaultState = {
+            lessons: { 1: true, 2: false, 3: false, 4: false, 5: false },
+            currentLesson: 1,
+            currentStars: 0,
+            lives: 3,
+            deadline: null // время в миллисекундах, до которого нужно сдать следующий урок
+        };
+
+        // Загружаем прогресс или используем default
+        function loadProgress() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    // Проверим структуру
+                    if (parsed && typeof parsed === 'object' && parsed.lessons && parsed.currentLesson !== undefined && parsed.currentStars !== undefined && parsed.lives !== undefined) {
+                        return parsed;
+                    }
+                } catch (e) {}
+            }
+            return defaultState;
+        }
+
+        function saveProgress() {
+            const data = {
+                lessons: lessons,
+                currentLesson: currentLesson,
+                currentStars: currentStars,
+                lives: lives,
+                deadline: deadline
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        // Инициализация из localStorage
+        let state = loadProgress();
+        let lessons = state.lessons;
+        let currentLesson = state.currentLesson;
+        let currentStars = state.currentStars;
+        let lives = state.lives;
+        let deadline = state.deadline ? state.deadline : null; // timestamp
+
+        const maxStars = 15;
+        const maxLives = 3;
+
+        // Элементы DOM
+        const starSpan = document.getElementById('starCounter');
+        const livesContainer = document.getElementById('livesContainer');
+        const deadlineTimerSpan = document.getElementById('deadlineTimer');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const openMenuBtn = document.getElementById('openMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const lessonListEl = document.getElementById('lessonList');
+        const currentLessonTitle = document.getElementById('currentLessonTitle');
+        const curatorChatBtn = document.getElementById('curatorChatBtn');
+        const unlockNextBtn = document.getElementById('unlockNextBtn');
+        const secretCodeInput = document.getElementById('secretCodeInput');
+        const codeModal = document.getElementById('codeModal');
+        const modalCodeInput = document.getElementById('modalCodeInput');
+        const submitModalCode = document.getElementById('submitModalCode');
+        const cancelModalBtn = document.getElementById('cancelModalBtn');
+        const customModal = document.getElementById('customNotification');
+        const notificationTitle = document.getElementById('notificationTitle');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const closeNotification = document.getElementById('closeNotification');
+
+        let selectedLesson = null;
+
+        // Коды для уроков 2-5
+        const SECRET_CODES = {
+            2: 'KERNING_PRO',
+            3: 'CTRL+SHIFT+N',
+            4: 'PIXEL_PERFECT',
+            5: 'DOT_GRID'
+        };
+
+        // Названия уроков
+        const lessonNames = {
+            1: 'Урок YS · Старт',
+            2: 'Урок 2 · Коммерческий интерфейс',
+            3: 'Урок 3 · Типографика',
+            4: 'Урок 4 · Сетки',
+            5: 'Урок 5 · Финальный проект'
+        };
+
+        // Вспомогательная функция показа кастомного уведомления
+        function showNotification(title, message) {
+            notificationTitle.innerText = title;
+            notificationMessage.innerText = message;
+            customModal.classList.add('active');
+        }
+
+        closeNotification.addEventListener('click', () => {
+            customModal.classList.remove('active');
+        });
+
+        // Обновление отображения жизней и таймера
+        function updateLivesAndTimer() {
+            let hearts = '';
+            for (let i = 0; i < maxLives; i++) {
+                hearts += i < lives ? '❤️' : '🖤';
+            }
+            livesContainer.innerHTML = hearts;
+
+            if (deadline && lives > 0) {
+                const now = Date.now();
+                const diff = deadline - now;
+                if (diff <= 0) {
+                    // время вышло, нужно уменьшить жизнь
+                    loseLife();
+                } else {
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    deadlineTimerSpan.innerText = `${hours}ч ${minutes}м`;
+                }
+            } else {
+                deadlineTimerSpan.innerText = '--:--';
+            }
+        }
+
+        // Потеря жизни
+        function loseLife() {
+            if (lives > 0) {
+                lives--;
+                // Если жизни кончились, блокируем все уроки, кроме первого? Или оставляем доступными?
+                if (lives === 0) {
+                    // Блокируем все уроки, кроме первого? По смыслу доступ должен быть закрыт.
+                    // Можно просто запретить любые действия.
+                    showNotification('💔 Жизни кончились', 'Вы исчерпали все жизни. Доступ к урокам закрыт. Обратитесь к куратору.');
+                    // Заблокируем все неоткрытые уроки и возможно текущий, но оставим первый для вида
+                    for (let i = 2; i <= 5; i++) {
+                        lessons[i] = false;
+                    }
+                    // Сбросим дедлайн
+                    deadline = null;
+                } else {
+                    // Устанавливаем новый дедлайн через 24 часа от текущего момента
+                    deadline = Date.now() + 24 * 60 * 60 * 1000;
+                }
+                saveProgress();
+                renderUI();
+            }
+        }
+
+        // Восстановление жизней (до максимума)
+        function restoreLives() {
+            lives = maxLives;
+            // Устанавливаем новый дедлайн для следующего урока (24 часа)
+            deadline = Date.now() + 24 * 60 * 60 * 1000;
+            saveProgress();
+            renderUI();
+        }
+
+        // Проверка дедлайна (вызывается каждую минуту)
+        setInterval(() => {
+            if (deadline && lives > 0) {
+                const now = Date.now();
+                if (now >= deadline) {
+                    loseLife();
+                } else {
+                    updateLivesAndTimer();
+                }
+            }
+        }, 60000); // каждую минуту
+
+        // Обновление интерфейса
+        function renderUI() {
+            // Обновить список в меню с учетом жизней
+            const items = lessonListEl.querySelectorAll('li');
+            items.forEach(li => {
+                const lesson = li.dataset.lesson;
+                if (lives === 0 && lesson != 1) {
+                    // если жизней нет, все уроки кроме первого заблокированы
+                    li.classList.remove('available');
+                    li.classList.add('locked');
+                    li.querySelector('.lock-icon').innerHTML = '🔒';
+                } else if (lessons[lesson]) {
+                    li.classList.remove('locked');
+                    li.classList.add('available');
+                    li.querySelector('.lock-icon').innerHTML = (parseInt(lesson) === currentLesson) ? '⭐ ▶' : '⭐';
+                } else {
+                    li.classList.remove('available');
+                    li.classList.add('locked');
+                    li.querySelector('.lock-icon').innerHTML = '🔒';
+                }
+            });
+
+            // Обновить заголовок текущего урока
+            currentLessonTitle.innerText = lessonNames[currentLesson] || 'Урок';
+
+            // Обновить счётчик звёзд
+            starSpan.innerText = currentStars + '/15';
+
+            // Обновить жизни и таймер
+            updateLivesAndTimer();
+
+            // Блокировать кнопку разблокировки, если жизни = 0
+            unlockNextBtn.disabled = (lives === 0);
+        }
+
+        // Разблокировка урока (добавляет 3 звезды, делает доступным, восстанавливает жизни)
+        function unlockLesson(lessonNum, code) {
+            if (lives === 0) {
+                showNotification('❌ Доступ закрыт', 'У вас нет жизней. Свяжитесь с куратором.');
+                return false;
+            }
+            if (!lessons[lessonNum] && SECRET_CODES[lessonNum] === code) {
+                lessons[lessonNum] = true;
+                currentStars = Math.min(currentStars + 3, maxStars);
+                // Восстанавливаем жизни до максимума
+                restoreLives();
+                // Если открываем следующий за текущим, делаем его текущим
+                if (lessonNum === currentLesson + 1) {
+                    currentLesson = lessonNum;
+                }
+                renderUI();
+                saveProgress();
+                // Показываем поздравление
+                showNotification('🎉 Поздравляем!', `Урок ${lessonNum} открыт! +3 звезды, жизни восстановлены.`);
+                return true;
+            }
+            return false;
+        }
+
+        // Обработка клика по пункту меню
+        lessonListEl.addEventListener('click', (e) => {
+            const li = e.target.closest('li');
+            if (!li) return;
+            const lesson = li.dataset.lesson;
+            if (lives === 0 && lesson != 1) {
+                showNotification('❌ Доступ закрыт', 'У вас нет жизней. Свяжитесь с куратором.');
+                return;
+            }
+            if (lessons[lesson]) {
+                // доступен — просто переключаем текущий
+                currentLesson = parseInt(lesson);
+                renderUI();
+                saveProgress();
+                menuOverlay.style.display = 'none';
+            } else {
+                // закрыт — запрашиваем код
+                selectedLesson = parseInt(lesson);
+                modalCodeInput.value = '';
+                codeModal.classList.add('active');
+            }
+        });
+
+        // Отправка кода из модалки
+        submitModalCode.addEventListener('click', () => {
+            const code = modalCodeInput.value.trim();
+            if (selectedLesson && unlockLesson(selectedLesson, code)) {
+                codeModal.classList.remove('active');
+                menuOverlay.style.display = 'none';
+            } else {
+                showNotification('❌ Ошибка', 'Неверный код. Попроси у куратора @Nukem_M');
+            }
+        });
+
+        cancelModalBtn.addEventListener('click', () => {
+            codeModal.classList.remove('active');
+            selectedLesson = null;
+        });
+
+        // Закрытие модалки кликом вне
+        window.addEventListener('click', (e) => {
+            if (e.target === codeModal) {
+                codeModal.classList.remove('active');
+            }
+            if (e.target === customModal) {
+                customModal.classList.remove('active');
+            }
+        });
+
+        // Кнопка разблокировать (основное поле) — для следующего урока
+        unlockNextBtn.addEventListener('click', () => {
+            const inputCode = secretCodeInput.value.trim();
+            const nextLesson = currentLesson + 1;
+            if (nextLesson <= 5 && SECRET_CODES[nextLesson] === inputCode) {
+                if (unlockLesson(nextLesson, inputCode)) {
+                    secretCodeInput.value = '';
+                }
+            } else {
+                showNotification('❌ Ошибка', 'Код не подходит для следующего урока. Попробуй ещё или спроси у @Nukem_M');
+            }
+        });
+
+        // Кнопка перехода к куратору
+        curatorChatBtn.addEventListener('click', () => {
+            window.open('https://t.me/Nukem_M', '_blank');
+        });
+
+        // Меню открыть/закрыть
+        openMenuBtn.addEventListener('click', () => {
+            menuOverlay.style.display = 'flex';
+        });
+        closeMenuBtn.addEventListener('click', () => {
+            menuOverlay.style.display = 'none';
+        });
+        menuOverlay.addEventListener('click', (e) => {
+            if (e.target === menuOverlay) menuOverlay.style.display = 'none';
+        });
+
+        // При первом запуске, если дедлайн не установлен, устанавливаем его (для первого урока)
+        if (!deadline && lives > 0) {
+            deadline = Date.now() + 24 * 60 * 60 * 1000;
+            saveProgress();
+        }
+
+        // Инициализация интерфейса
+        renderUI();
+    })();
+</script>
+</body>
+</html>
