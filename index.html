@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title> SANJAR SCHOOL · тёмный минимализм</title>
     <style>
         * {
@@ -18,7 +18,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 12px;
         }
 
         /* главный контейнер — тёмное стекло */
@@ -26,9 +26,9 @@
             max-width: 1000px;
             width: 100%;
             background: #13161c;
-            border-radius: 36px;
+            border-radius: 32px;
             border: 1px solid #2a2f3a;
-            padding: 28px 32px;
+            padding: 24px 24px;
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
         }
 
@@ -37,86 +37,90 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
         .invite {
             background: #1e232b;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 40px;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: #b0b8c5;
             border: 1px solid #2f3642;
             letter-spacing: 0.2px;
+            white-space: nowrap;
         }
 
         .invite span {
             color: #f5b342;
-            margin-right: 6px;
+            margin-right: 4px;
         }
 
         .invite .username {
             color: #7b9eff;
             font-weight: 600;
-            margin-left: 8px;
+            margin-left: 4px;
         }
 
         .stats-row {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 12px;
             background: #1a1f28;
-            padding: 6px 18px 6px 24px;
+            padding: 4px 12px 4px 16px;
             border-radius: 60px;
             border: 1px solid #2f3642;
+            flex-wrap: wrap;
         }
 
         .stars {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
             font-weight: 600;
             color: #e0e4ec;
+            font-size: 0.9rem;
         }
 
         .stars .value {
             background: #2c2f3b;
             color: #f5b342;
-            padding: 4px 12px;
+            padding: 3px 8px;
             border-radius: 40px;
             font-weight: 700;
         }
 
         .lives {
             display: flex;
-            gap: 6px;
+            gap: 3px;
             color: #ff5e5e;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             line-height: 1;
         }
 
         .deadline-timer {
             color: #f5b342;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
             background: #262d39;
-            padding: 4px 12px;
+            padding: 4px 8px;
             border-radius: 40px;
             border: 1px solid #3c4452;
+            white-space: nowrap;
         }
 
         .menu-btn {
             background: #262d39;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 300;
             color: #c0c8d5;
             cursor: pointer;
@@ -134,21 +138,23 @@
         .identity {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 24px;
             background: #11161e;
-            padding: 14px 26px;
-            border-radius: 70px;
+            padding: 10px 18px;
+            border-radius: 60px;
             border: 1px solid #2a2f3a;
+            flex-wrap: wrap;
         }
 
         .avatar {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             overflow: hidden;
             background: #2b313e;
             border: 2px solid #404754;
+            flex-shrink: 0;
         }
 
         .avatar img {
@@ -160,30 +166,31 @@
 
         .designer-name {
             font-weight: 600;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #f0f3fa;
             letter-spacing: -0.3px;
+            white-space: nowrap;
         }
 
         .school-badge {
             margin-left: auto;
             background: #000000;
             color: #f5b342;
-            padding: 10px 26px;
+            padding: 6px 16px;
             border-radius: 60px;
             font-weight: 800;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             border: 1px solid #3a3f4b;
-            box-shadow: none;
+            white-space: nowrap;
         }
 
         .school-badge span {
             background: #2f2f2f;
             color: #dddddd;
-            font-size: 0.85rem;
-            padding: 3px 10px;
+            font-size: 0.7rem;
+            padding: 2px 8px;
             border-radius: 60px;
-            margin-left: 10px;
+            margin-left: 6px;
         }
 
         /* шапка урока */
@@ -191,31 +198,34 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
+            gap: 8px;
         }
 
         .lesson-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: #eef2f8;
+            line-height: 1.3;
         }
 
         .lesson-tag {
             background: #252c38;
-            padding: 6px 18px;
+            padding: 4px 12px;
             border-radius: 60px;
             color: #b9c2d2;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             border: 1px solid #363e4b;
+            white-space: nowrap;
         }
 
         /* карточка куратора */
         .curator-block {
             background: #151b24;
-            border-radius: 28px;
-            padding: 22px 28px;
-            margin: 20px 0;
+            border-radius: 24px;
+            padding: 18px 20px;
+            margin: 16px 0;
             border: 1px solid #2c3440;
         }
 
@@ -224,14 +234,15 @@
             border: 1px solid #3e4a5a;
             color: white;
             font-weight: 600;
-            font-size: 1.2rem;
-            padding: 16px 28px;
+            font-size: 1rem;
+            padding: 14px 20px;
             border-radius: 60px;
             width: 100%;
             cursor: pointer;
             transition: 0.15s;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             text-align: center;
+            word-break: break-word;
         }
 
         .curator-btn:hover {
@@ -242,9 +253,10 @@
         .curator-info {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             color: #b7c0cd;
             font-weight: 500;
+            flex-wrap: wrap;
         }
 
         .curator-info .dot {
@@ -258,6 +270,7 @@
             color: #7b9eff;
             text-decoration: none;
             font-weight: 600;
+            word-break: break-all;
         }
 
         .curator-info a:hover {
@@ -267,36 +280,37 @@
         /* блок ДЗ */
         .hw-block {
             background: #131a22;
-            border-radius: 26px;
-            padding: 24px;
-            margin: 24px 0;
+            border-radius: 22px;
+            padding: 18px;
+            margin: 20px 0;
             border-left: 6px solid #f5b342;
         }
 
         .hw-title {
             font-weight: 700;
-            font-size: 1.4rem;
-            margin-bottom: 14px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
             color: #e2e8f0;
         }
 
         .hw-text {
             color: #9aa5b5;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
         /* видео */
         .video-container {
             background: #0e1219;
-            border-radius: 28px;
-            padding: 8px;
-            margin: 32px 0;
+            border-radius: 24px;
+            padding: 6px;
+            margin: 24px 0;
             border: 2px dashed #3a4353;
         }
 
         .video-container video {
             width: 100%;
-            border-radius: 20px;
+            border-radius: 18px;
             display: block;
             outline: none;
         }
@@ -304,26 +318,27 @@
         /* поле ввода кода */
         .code-section {
             background: #151c26;
-            border-radius: 26px;
-            padding: 22px;
-            margin: 28px 0;
+            border-radius: 22px;
+            padding: 16px;
+            margin: 20px 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
             align-items: center;
             border: 1px solid #2d3643;
         }
 
         .code-section input {
-            flex: 2 1 250px;
-            padding: 16px 24px;
+            flex: 2 1 200px;
+            padding: 14px 18px;
             background: #0d121b;
             border: 2px solid #2b3442;
-            border-radius: 70px;
-            font-size: 1rem;
+            border-radius: 60px;
+            font-size: 0.95rem;
             color: #e8ecf2;
             outline: none;
             transition: 0.1s;
+            width: 100%;
         }
 
         .code-section input:focus {
@@ -336,12 +351,13 @@
             border: none;
             color: white;
             font-weight: 600;
-            padding: 16px 24px;
-            border-radius: 70px;
+            padding: 14px 18px;
+            border-radius: 60px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             border: 1px solid #3e4b5e;
             transition: 0.15s;
+            width: 100%;
         }
 
         .code-section button:disabled {
@@ -357,39 +373,42 @@
         /* контакты */
         .contacts-frame {
             background: #11171f;
-            border-radius: 28px;
-            padding: 24px;
-            margin-top: 30px;
+            border-radius: 24px;
+            padding: 20px;
+            margin-top: 24px;
             border: 1px solid #2d3542;
         }
 
         .contacts-title {
             font-weight: 600;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
             color: #d5deec;
         }
 
         .contacts-links {
             display: flex;
-            gap: 30px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             background: #1b232e;
-            padding: 12px 26px;
+            padding: 10px 18px;
             border-radius: 60px;
             border: 1px solid #313b48;
+            font-size: 0.9rem;
+            flex: 1 1 auto;
         }
 
         .contact-item a {
             text-decoration: none;
             color: #7b9eff;
             font-weight: 600;
+            word-break: break-all;
         }
 
         /* меню (оверлей) */
@@ -404,10 +423,11 @@
         }
 
         .menu-panel {
-            width: 360px;
+            width: 300px;
+            max-width: 80%;
             background: #131a22;
             height: 100%;
-            padding: 32px 24px;
+            padding: 24px 16px;
             border-left: 2px solid #2b3545;
             box-shadow: -8px 0 30px rgba(0,0,0,0.6);
             overflow-y: auto;
@@ -417,17 +437,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 36px;
+            margin-bottom: 28px;
         }
 
         .menu-header h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 600;
             color: #edf2f9;
         }
 
         .close-menu {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             line-height: 1;
             cursor: pointer;
             color: #9aa9bb;
@@ -435,22 +455,23 @@
 
         .lessons-list {
             list-style: none;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .lessons-list li {
-            padding: 18px 22px;
+            padding: 14px 16px;
             background: #1b232f;
-            margin-bottom: 12px;
-            border-radius: 30px;
+            margin-bottom: 10px;
+            border-radius: 24px;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: 0.1s;
             color: #ccd6e6;
+            font-size: 0.95rem;
         }
 
         .lessons-list li.available {
@@ -468,25 +489,28 @@
 
         .lessons-list li .lock-icon {
             margin-left: auto;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .menu-contacts {
             border-top: 2px solid #2a3340;
-            padding-top: 28px;
+            padding-top: 20px;
         }
 
         .menu-contacts p {
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: #b7c3d3;
+            font-size: 0.95rem;
         }
 
         .menu-contacts a {
             display: block;
-            margin: 8px 0;
+            margin: 6px 0;
             color: #7b9eff;
             text-decoration: none;
+            font-size: 0.9rem;
+            word-break: break-all;
         }
 
         /* кастомные модальные окна */
@@ -495,12 +519,13 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: #1b232f;
-            padding: 32px;
-            border-radius: 48px;
+            padding: 24px 20px;
+            border-radius: 40px;
             box-shadow: 0 30px 50px rgba(0,0,0,0.7);
             z-index: 1200;
             display: none;
-            width: 380px;
+            width: 300px;
+            max-width: 90%;
             border: 2px solid #3a4557;
             color: #eef2f8;
             text-align: center;
@@ -511,15 +536,15 @@
         }
 
         .custom-modal h4 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
             color: #f5b342;
         }
 
         .custom-modal p {
-            font-size: 1.2rem;
-            margin-bottom: 28px;
-            line-height: 1.5;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            line-height: 1.4;
         }
 
         .custom-modal button {
@@ -527,10 +552,10 @@
             border: 1px solid #4b5a72;
             color: white;
             font-weight: 600;
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: 0.15s;
         }
 
@@ -545,12 +570,13 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: #1b232f;
-            padding: 32px;
-            border-radius: 48px;
+            padding: 24px;
+            border-radius: 40px;
             box-shadow: 0 30px 50px rgba(0,0,0,0.7);
             z-index: 1100;
             display: none;
-            width: 340px;
+            width: 300px;
+            max-width: 90%;
             border: 2px solid #3a4557;
         }
 
@@ -559,34 +585,35 @@
         }
 
         .code-modal h4 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
             color: #f0f4fc;
         }
 
         .code-modal input {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: #0f151f;
             border: 2px solid #2d3849;
             border-radius: 40px;
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
             color: white;
         }
 
         .modal-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
         .modal-buttons button {
             flex: 1;
-            padding: 14px;
+            padding: 12px;
             border: none;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .modal-buttons .submit-code {
@@ -599,6 +626,64 @@
             background: #262e3a;
             color: #b1c0d2;
             border: 1px solid #3a4557;
+        }
+
+        /* медиа-запросы для очень маленьких экранов */
+        @media (max-width: 500px) {
+            .app {
+                padding: 16px;
+                border-radius: 24px;
+            }
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .invite {
+                text-align: center;
+                white-space: normal;
+            }
+            .stats-row {
+                justify-content: center;
+            }
+            .identity {
+                justify-content: center;
+            }
+            .designer-name {
+                font-size: 1rem;
+            }
+            .school-badge {
+                font-size: 1rem;
+                padding: 4px 12px;
+            }
+            .lesson-title {
+                font-size: 1.3rem;
+            }
+            .curator-btn {
+                font-size: 0.9rem;
+                padding: 12px 16px;
+            }
+            .contacts-links {
+                flex-direction: column;
+            }
+            .contact-item {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .stats-row {
+                gap: 6px;
+                flex-wrap: wrap;
+            }
+            .stars .value {
+                padding: 2px 6px;
+            }
+            .lives {
+                font-size: 1rem;
+            }
+            .deadline-timer {
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -622,7 +707,7 @@
         </div>
     </div>
 
-    <!-- Аватар (теперь фото) + RAZEX_DESIGN + SANJAR SCHOOL -->
+    <!-- Аватар + RAZEX_DESIGN + SANJAR SCHOOL -->
     <div class="identity">
         <div class="avatar">
             <img src="SANJAR_DESIGN.jpg" alt="RAZEX_DESIGN" onerror="this.style.display='none'; this.parentElement.innerHTML='RD';">
